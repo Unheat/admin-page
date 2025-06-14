@@ -10,10 +10,36 @@
   'GRAD' 0,
   'opsz' 24
 }
+body{
+    background-color: rgb(236, 222, 222);
+}
+.container {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows:  50px 70px repeat(auto-fit, minmax(200px, auto));;
+  /* force it to span the *entire* viewport */
+    width: 95vw;
+    min-height: 95vh;
+}
 
+*{
+    border: solid;
+    border-color: red;
+    
+}
+/*side-bar*/
+.left-bar{
+    grid-row: 1/-1;
+    display: flex;
+    flex-direction: column;
+    background-color: rgb(35, 117, 117);
+    color: white;
+}
 /*header*/
 .header{
     display: flex;
+    grid-column: 2/5;
+    background-color: white;
 }
 .search {
     display: grid;
@@ -41,8 +67,46 @@
     flex: 1 0 20%;
     align-items: center;
 }
-*{
-    border: solid;
-    border-color: red;
+
+/*header2*/
+.header2{
+    grid-column: 2/5;
+    display: flex;
+    background-color: white;
     
 }
+.avatar-2{
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-right: 12px;
+    cursor: pointer;
+}
+.intro{
+    flex: 2 0 40%;
+    display: flex;
+    align-items: center;
+}
+.file{
+    flex: 1 0 30%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  
+}
+.file button {
+    margin: auto;
+}
+
+.intro > div p,
+.intro > div h1 {
+  margin: 0;
+}
+
+/*project*/
+.project{
+    grid-column: 2/4;
+    grid-row: 3/-1;
+}
+
