@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Draggable Sidebar</title>
+  <style>
+    html, body { margin: 0; height: 100%; }
+    .container {
+      display: flex;
+      height: 100%;
+      width: 100%;
+      overflow: hidden;
+    }
+    .sidebar {
+      width: 250px;              /* initial width */
+      min-width: 100px;          /* don’t shrink too small */
+      max-width: 80%;            /* don’t grow over 80% */
+      background: #2c3e50;
+      color: white;
+      padding: 1rem;
+      box-sizing: border-box;
+    }
+    .resizer {
+      width: 5px;
+      cursor: ew-resize;
+      background: #aaa;
+    }
+    .main {
+      flex: 1;
+      background: #ecf0f1;
+      padding: 1rem;
+      box-sizing: border-box;
+    }
+  </style>
+</head>
+<body>
+  <div class="container" id="container">
+    <div class="sidebar" id="sidebar">
+      <h2>Sidebar</h2>
+      <p>Drag the edge to resize me.</p>
+    </div>
+    <div class="resizer" id="resizer"></div>
+    <div class="main">
+      <h2>Main Content</h2>
+      <p>I expand and shrink with the sidebar.</p>
+    </div>
+  </div>
+
+  <script>
+    const sidebar = document.getElementById('sidebar');
+    const resizer = document.getElementById('resizer');
+
+    let startX, startWidth;
+
+    resizer.addEventListener('mousedown', e => {
+      e.preventDefault();                    // prevent text selection
+      startX = e.clientX;                    // initial mouse X
+      startWidth = sidebar.getBoundingClientRect().width;
+      document.addEventListener('mousemove', onMouseMove);
+      document.addEventListener('mouseup',   onMouseUp);
+    });
+
+    function onMouseMove(e) {
+      const dx = e.clientX - startX;
+      const newWidth = startWidth + dx;
+      // enforce min/max
+      if (newWidth > 100 && newWidth < window.innerWidth * 0.8) {
+        sidebar.style.width = `${newWidth}px`;
+      }
+    }
+
+    function onMouseUp() {
+      document.removeEventListener('mousemove', onMouseMove);
+      document.removeEventListener('mouseup',   onMouseUp);
+    }
+  </script>
+</body>
+</html>
