@@ -16,17 +16,24 @@ body{
 .container {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    grid-template-rows:  50px 70px repeat(auto-fit, minmax(200px, auto));;
+    grid-template-rows:  50px 70px 1fr;
+     grid-auto-rows: minmax(200px, auto); /* any further rows */
   /* force it to span the *entire* viewport */
-    width: 95vw;
-    min-height: 95vh;
+    width: 100vw;
+    height: 100vh;
 }
 
 *{
     border: solid;
-    border-color: red;
+    border-color: rgb(67, 57, 57);
     
 }
+html, body {
+  height: 100%;
+  margin: 0;
+  overflow: hidden;    /* Prevent the whole page from scrolling */
+}
+
 /*side-bar*/
 .left-bar{
     grid-row: 1/-1;
@@ -108,5 +115,13 @@ body{
 .project{
     grid-column: 2/4;
     grid-row: 3/-1;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, auto)) ;
+    overflow-y: auto;    /* allow internal vertical scroll */
 }
 
+/*right-bar*/
+.right-bar{
+    grid-row: 3/-1;
+    display:grid;
+}
